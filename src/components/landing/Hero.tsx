@@ -1,6 +1,8 @@
+"use client";
+
 import { SignUpButton } from "@clerk/nextjs";
 import { Button } from "../ui/button";
-import { CalendarIcon, MicIcon, StarIcon } from "lucide-react";
+import { Calendar, Mic, Star } from "lucide-react";
 import Image from "next/image";
 
 function Hero() {
@@ -55,14 +57,14 @@ function Hero() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <SignUpButton mode="modal">
                   <Button size={"lg"}>
-                    <MicIcon className="mr-2 size-5" />
+                    <Mic className="mr-2 h-5 w-5" />
                     Try voice agent
                   </Button>
                 </SignUpButton>
 
                 <SignUpButton mode="modal">
                   <Button size={"lg"} variant={"outline"}>
-                    <CalendarIcon className="mr-2 size-5" />
+                    <Calendar className="mr-2 h-5 w-5" />
                     Book appointment
                   </Button>
                 </SignUpButton>
@@ -78,6 +80,7 @@ function Hero() {
                       alt="Jessica Davis"
                       width={48}
                       height={48}
+                      unoptimized
                       className="w-12 h-12 rounded-full object-cover ring-4 ring-background"
                     />
                     <Image
@@ -85,6 +88,7 @@ function Hero() {
                       alt="Sam Miller"
                       width={48}
                       height={48}
+                      unoptimized
                       className="w-12 h-12 rounded-full object-cover ring-4 ring-background"
                     />
                     <Image
@@ -92,6 +96,7 @@ function Hero() {
                       alt="Anna Lopez"
                       width={48}
                       height={48}
+                      unoptimized
                       className="w-12 h-12 rounded-full object-cover ring-4 ring-background"
                     />
                     <Image
@@ -99,6 +104,7 @@ function Hero() {
                       alt="Mike Rodriguez"
                       width={48}
                       height={48}
+                      unoptimized
                       className="w-12 h-12 rounded-full object-cover ring-4 ring-background"
                     />
                     <Image
@@ -106,6 +112,7 @@ function Hero() {
                       alt="Katie Lee"
                       width={48}
                       height={48}
+                      unoptimized
                       className="w-12 h-12 rounded-full object-cover ring-4 ring-background"
                     />
                   </div>
@@ -115,7 +122,7 @@ function Hero() {
                     <div className="flex items-center gap-2">
                       <div className="flex items-center gap-1">
                         {[1, 2, 3, 4, 5].map((star) => (
-                          <StarIcon key={star} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                          <Star key={star} className="h-4 w-4 fill-amber-400 text-amber-400" />
                         ))}
                       </div>
                       <span className="text-sm font-bold text-foreground">4.9/5</span>
