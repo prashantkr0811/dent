@@ -21,6 +21,15 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
+    // Check if RESEND_API_KEY is configured
+    if (!process.env.RESEND_API_KEY) {
+      console.warn("⚠️ RESEND_API_KEY not configured, skipping email send");
+      return NextResponse.json(
+        { message: "Appointment confirmed (email skipped - no API key)" },
+        { status: 200 }
+      );
+    }
+
     // send the email
     // do not use this in prod, only for testing purposes
     const { data, error } = await resend.emails.send({

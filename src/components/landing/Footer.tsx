@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { scrollToSection } from "@/lib/scroll-utils";
 
 function Footer() {
   return (
@@ -7,7 +10,10 @@ function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
+            <button
+              onClick={() => scrollToSection("how-it-works")}
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer"
+            >
               <Image
                 src="/logo.png"
                 alt="DentWise Logo"
@@ -16,7 +22,7 @@ function Footer() {
                 className="w-8 h-8"
               />
               <span className="font-semibold text-lg">Dental</span>
-            </div>
+            </button>
             <p className="text-sm text-muted-foreground">
               AI-powered dental assistance that actually helps.
             </p>
@@ -26,14 +32,20 @@ function Footer() {
             <h4 className="font-medium mb-3">Product</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link href="/how-it-works" className="hover:text-foreground">
+                <button
+                  onClick={() => scrollToSection("how-it-works")}
+                  className="hover:text-foreground cursor-pointer transition-colors"
+                >
                   How it works
-                </Link>
+                </button>
               </li>
               <li>
-                <Link href="/pricing" className="hover:text-foreground">
+                <button
+                  onClick={() => scrollToSection("pricing")}
+                  className="hover:text-foreground cursor-pointer transition-colors"
+                >
                   Pricing
-                </Link>
+                </button>
               </li>
               <li>
                 <Link href="/faq" className="hover:text-foreground">

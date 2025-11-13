@@ -10,3 +10,31 @@ export const config = {
     '/(api|trpc)(.*)',
   ],
 };
+
+// middleware.ts
+// import { NextResponse } from "next/server";
+// import type { NextRequest } from "next/server";
+
+// const ADMIN_PATH = "/admin";
+
+// export function middleware(req: NextRequest) {
+//   const { pathname } = req.nextUrl;
+
+//   // If request is not under /admin, do nothing
+//   if (!pathname.startsWith(ADMIN_PATH)) return NextResponse.next();
+
+//   // Example check: cookie or header indicating admin role
+//   const isAdmin = req.cookies.get("isAdmin")?.value === "true";
+
+//   if (!isAdmin) {
+//     // redirect to dashboard if user is not admin
+//     return NextResponse.redirect(new URL("/dashboard", req.url));
+//   }
+
+//   return NextResponse.next();
+// }
+
+// // apply to routes (next.config or export matcher)
+// export const config = {
+//   matcher: ["/admin/:path*"],
+// };

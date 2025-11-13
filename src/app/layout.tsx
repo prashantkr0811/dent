@@ -40,10 +40,9 @@ export default function RootLayout({
           },
         }}
       >
-        <html lang="en">
-          <body className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}>
-            {/* this is done in the home page component */}
-            {/* <UserSync /> */}
+        <html lang="en" suppressHydrationWarning>
+          <body suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}>
+            <UserSync />
             <Toaster />
             {children}
           </body>

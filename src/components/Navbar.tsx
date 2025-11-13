@@ -7,7 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 function Navbar() {
-  const { user } = useUser();
+  const { user, isLoaded } = useUser();
   const pathname = usePathname();
 
   return (
@@ -66,16 +66,18 @@ function Navbar() {
         {/* RIGHT SECTION */}
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-3">
-            <div className="hidden lg:flex flex-col items-end">
-              <span className="text-sm font-medium text-foreground">
-                {user?.firstName} {user?.lastName}
-              </span>
-              <span className="text-xs text-muted-foreground">
-                {user?.emailAddresses?.[0]?.emailAddress}
-              </span>
-            </div>
+            {isLoaded && user && (
+              <div className="hidden lg:flex flex-col items-end">
+                <span className="text-sm font-medium text-foreground">
+                  {user?.firstName} {user?.lastName}
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  {user?.emailAddresses?.[0]?.emailAddress}
+                </span>
+              </div>
+            )}
 
-            <UserButton />
+            {isLoaded && <UserButton />}
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@ import { CheckCircle } from "lucide-react";
 
 function PricingSection() {
   return (
-    <section className="relative py-32 px-6 overflow-hidden bg-linear-to-b from-background via-muted/3 to-background">
+    <section id="pricing" className="relative py-32 px-6 overflow-hidden bg-linear-to-b from-background via-muted/3 to-background">
       {/* Grid Background Pattern */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-linear-to-br from-background via-muted/5 to-primary/5">
@@ -100,9 +100,11 @@ function PricingSection() {
                   <p className="text-muted-foreground">AI consultations + appointment booking</p>
                 </div>
 
-                <Button className="w-full py-3 bg-linear-to-r from-primary to-primary/90 hover:from-primary/95 hover:to-primary/85 text-primary-foreground rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
-                  Start AI Basic
-                </Button>
+                <SignUpButton mode="modal">
+                  <Button className="w-full py-3 bg-linear-to-r from-primary to-primary/90 hover:from-primary/95 hover:to-primary/85 text-primary-foreground rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+                    Start AI Basic
+                  </Button>
+                </SignUpButton>
 
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
@@ -147,12 +149,14 @@ function PricingSection() {
                   <p className="text-muted-foreground">Unlimited AI consultations</p>
                 </div>
 
-                <Button
-                  variant="outline"
-                  className="w-full py-3 border-2 border-primary/20 hover:border-primary/40 hover:bg-primary/5 rounded-xl font-semibold transition-all duration-300"
-                >
-                  Upgrade to AI Pro
-                </Button>
+                <SignUpButton mode="modal">
+                  <Button
+                    variant="outline"
+                    className="w-full py-3 border-2 border-primary/20 hover:border-primary/40 hover:bg-primary/5 rounded-xl font-semibold transition-all duration-300"
+                  >
+                    Upgrade to AI Pro
+                  </Button>
+                </SignUpButton>
 
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">

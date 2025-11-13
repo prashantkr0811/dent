@@ -1,10 +1,11 @@
 // src/lib/resend.ts
 import { Resend } from "resend";
 
-if (!process.env.RESEND_API_KEY) {
-  throw new Error("❌ Missing RESEND_API_KEY in environment variables");
-}
+// Create resend instance only if API key is available
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
-export const resend = new Resend(process.env.RESEND_API_KEY);
+if (!resend) {
+  console.warn("⚠️ RESEND_API_KEY not configured - email sending disabled");
+}
 
 export default resend;

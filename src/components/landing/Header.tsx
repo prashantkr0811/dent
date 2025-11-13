@@ -4,6 +4,7 @@ import { SignInButton, SignUpButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { scrollToSection } from "@/lib/scroll-utils";
 
 function Header() {
   return (
@@ -21,15 +22,24 @@ function Header() {
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
-          <a href="#" className="text-muted-foreground hover:text-foreground">
+          <button
+            onClick={() => scrollToSection("how-it-works")}
+            className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors"
+          >
             How it Works
-          </a>
-          <a href="#" className="text-muted-foreground hover:text-foreground">
+          </button>
+          <button
+            onClick={() => scrollToSection("pricing")}
+            className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors"
+          >
             Pricing
-          </a>
-          <a href="#" className="text-muted-foreground hover:text-foreground">
+          </button>
+          <button
+            onClick={() => scrollToSection("pricing")}
+            className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors"
+          >
             About
-          </a>
+          </button>
         </div>
 
         <div className="flex items-center gap-3">
