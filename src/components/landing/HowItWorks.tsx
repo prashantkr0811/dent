@@ -1,5 +1,7 @@
+"use client";
+
 import { SignUpButton } from "@clerk/nextjs";
-import { ArrowRightIcon, ZapIcon } from "lucide-react";
+import { ArrowRight, Zap } from "lucide-react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 
@@ -9,7 +11,7 @@ function HowItWorks() {
       {/* HEADER */}
       <div className="text-center mb-20">
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/5 to-primary/10 rounded-full border border-primary/10 backdrop-blur-sm mb-6">
-          <ZapIcon className="size-4 text-primary" />
+          <Zap className="h-4 w-4 text-primary" />
           <span className="text-sm font-medium text-primary">Simple Process</span>
         </div>
 
@@ -134,7 +136,7 @@ function HowItWorks() {
       <div className="text-center mt-16">
         <SignUpButton mode="modal">
           <Button size="lg">
-            <ArrowRightIcon className="mr-2 size-5" />
+            <ArrowRight className="mr-2 h-5 w-5" />
             Get started now
           </Button>
         </SignUpButton>
