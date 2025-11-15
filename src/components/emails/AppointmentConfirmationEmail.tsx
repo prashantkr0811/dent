@@ -39,7 +39,7 @@ function AppointmentConfirmationEmail({
           <Section style={logoContainer}>
             <Img
               // fixed invalid host (i.ibb.co.com was incorrect). Replace with your actual logo URL if different.
-              src="https://i.ibb.co/tRy6cC2/logo.png"
+              src="https://img.pikbest.com/png-images/20241204/minimalist-tooth-logo-design-for-dental-clinics_11170365.png!w700wp"
               width={50}
               height={50}
               alt="DentWise"

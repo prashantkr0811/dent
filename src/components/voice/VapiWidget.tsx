@@ -93,6 +93,7 @@ function VapiWidget() {
         setCallEnded(false);
 
         await vapi.start(process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID);
+        //await vapi.start(process.env.OPENAI_API_KEY);
       } catch (error) {
         console.log("Failed to start call", error);
         setConnecting(false);
