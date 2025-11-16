@@ -82,9 +82,3 @@ enum AppointmentStatus {
   CONFIRMED
   COMPLETED
 }
-{
-  "scripts": {
-    "postinstall": "prisma generate",
-    "build": "next build"
-  }
-}
