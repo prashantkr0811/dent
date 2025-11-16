@@ -2,49 +2,44 @@ import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import AdminDashboardClient from "./AdminDashboardClient";
 
-async function AdminPage() {
-  // Wrap in try/catch so any unexpected error redirects instead of 500
+export default async function AdminPage() {
   try {
     const user = await currentUser();
 
-    // user is not logged in
+    // Not logged in — send to home
     if (!user) {
-      redirect("/");
+      return redirect("/");
     }
 
-    // Get admin email from env (MAKE SURE THIS IS SET IN VERCEL)
+    // Must exist in Vercel → Settings → Environment Variables
     const adminEmail = process.env.ADMIN_EMAIL;
 
-    // If no admin email configured, do not allow access to /admin
+    // If not configured → deny access safely
     if (!adminEmail) {
-      // In dev you might want to throw, but in prod redirect is safer
-      redirect("/");
+      console.warn("ADMIN_EMAIL is missing from env.");
+      return redirect("/");
     }
 
-    // Safely get the user's primary email
+    // Always get the primary email first
     const primaryEmail =
       user.emailAddresses.find(
         (email) => email.id === user.primaryEmailAddressId
-      )?.emailAddress ??
-      user.emailAddresses[0]?.emailAddress ??
+      )?.emailAddress ||
+      user.emailAddresses[0]?.emailAddress ||
       null;
 
-    // If user has no email or it doesn't match the admin email -> not admin
+    // No email? Or mismatch? => Not admin
     if (
       !primaryEmail ||
       primaryEmail.toLowerCase() !== adminEmail.toLowerCase()
     ) {
-      // IMPORTANT: redirect to a PUBLIC route to avoid loops
-      redirect("/");
+      return redirect("/");
     }
 
-    // If we reached here, user is authenticated AND is the admin
+    // Fully authenticated & authorized
     return <AdminDashboardClient />;
-  } catch (error) {
-    // This prevents a hard 500 if something unexpected happens
-    console.error("Error in AdminPage:", error);
-    redirect("/");
+  } catch (err) {
+    console.error("AdminPage error:", err);
+    return redirect("/");
   }
 }
-
-export default AdminPage;
