@@ -17,7 +17,8 @@ const nextConfig: NextConfig = {
         hostname: "img.clerk.com",
       },
     ],
-    unoptimized: true,
+    // ❌ remove this line, or set it to false
+    // unoptimized: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
