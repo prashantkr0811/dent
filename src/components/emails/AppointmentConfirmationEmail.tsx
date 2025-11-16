@@ -28,8 +28,6 @@ function AppointmentConfirmationEmail({
   duration,
   price,
 }: AppointmentConfirmationEmailProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "";
-
   return (
     <Html>
       <Head />
@@ -38,10 +36,9 @@ function AppointmentConfirmationEmail({
         <Container style={container}>
           <Section style={logoContainer}>
             <Img
-              // fixed invalid host (i.ibb.co.com was incorrect). Replace with your actual logo URL if different.
-              src="https://img.pikbest.com/png-images/20241204/minimalist-tooth-logo-design-for-dental-clinics_11170365.png!w700wp"
-              width={50}
-              height={50}
+              src="https://i.ibb.co.com/tRy6cC2/logo.png"
+              width="50"
+              height="50"
               alt="DentWise"
               style={logo}
             />
@@ -85,7 +82,7 @@ function AppointmentConfirmationEmail({
           </Text>
 
           <Section style={buttonContainer}>
-            <Link style={button} href={`${baseUrl}/appointments`}>
+            <Link style={button} href={process.env.NEXT_PUBLIC_APP_URL + "/appointments"}>
               View My Appointments
             </Link>
           </Section>
@@ -107,7 +104,7 @@ function AppointmentConfirmationEmail({
 
 export default AppointmentConfirmationEmail;
 
-/* styles */
+// 🤡🤡🤡🤡🤡 styles that were generated using AI 🤡🤡🤡🤡🤡
 const main = {
   backgroundColor: "#ffffff",
   fontFamily:
