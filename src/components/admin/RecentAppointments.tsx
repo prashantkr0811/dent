@@ -1,41 +1,16 @@
 import { useGetAppointments, useUpdateAppointmentStatus } from "@/hooks/use-appointment";
-import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Badge } from "../ui/badge";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Calendar } from "lucide-react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Key, ReactNode } from "react";
-
-type Appointment = {
-  id: string;
-  patientName: string;
-  patientEmail: string;
-  doctorName: string;
-  date: string | number | Date;
-  time: string;
-  reason?: string;
-  status: "CONFIRMED" | "COMPLETED" | string;
-};
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
+import { Button } from "../ui/button";
 
 function RecentAppointments() {
-  const { data: appointments = [] } = useGetAppointments() as { data?: Appointment[] } || { data: [] };
+  const { data: appointments = [] } = useGetAppointments();
   const updateAppointmentMutation = useUpdateAppointmentStatus();
 
   const handleToggleAppointmentStatus = (appointmentId: string) => {
-    const appointment = (appointments || []).find((apt: Appointment) => apt.id === appointmentId);
+    const appointment = appointments.find((apt) => apt.id === appointmentId);
 
     const newStatus = appointment?.status === "CONFIRMED" ? "COMPLETED" : "CONFIRMED";
 
@@ -45,13 +20,9 @@ function RecentAppointments() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "CONFIRMED":
-        return (
-          <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">Confirmed</Badge>
-        );
+        return <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">Confirmed</Badge>;
       case "COMPLETED":
-        return (
-          <Badge className="bg-green-100 text-green-800 hover:bg-green-100">Completed</Badge>
-        );
+        return <Badge className="bg-green-100 text-green-800 hover:bg-green-100">Completed</Badge>;
       default:
         return <Badge variant="secondary">{status}</Badge>;
     }
@@ -82,8 +53,8 @@ function RecentAppointments() {
             </TableHeader>
 
             <TableBody>
-              {(appointments || []).map((appointment: Appointment, idx: number) => (
-                <TableRow key={appointment.id ?? `apt-${idx}`}>
+              {appointments.map((appointment) => (
+                <TableRow key={appointment.id}>
                   <TableCell>
                     <div>
                       <div className="font-medium">{appointment.patientName}</div>
