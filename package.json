@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",https://github.com/prashantkr0811/oral-health/pull/4/conflict?name=package.json&ancestor_oid=09eecc6876f34fe9ed22fe0b9ddef93df8dd81ab&base_oid=e1e7d3e5e609fa179fe995d4235891fccf6673ec&head_oid=c13efa4f92dbb4bca4d04a14a42e312b51f94a2c
+    "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "biome check",
     "format": "biome format --write",
-    "postinstall": "prisma generate",
-    "postinstall": "some-other-command && prisma generate",
+    "postinstall": "prisma generate"
+
     
 
   },
