@@ -10,14 +10,14 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  // Use a proper environment variable name here
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id        String @id @default(cuid())
-  clerkId   String @unique
-  email     String @unique
+  id        String   @id @default(cuid())
+  clerkId   String   @unique
+  email     String   @unique
   firstName String?
   lastName  String?
   phone     String?
@@ -39,7 +39,7 @@ model Doctor {
   bio         String?
   imageUrl    String
   gender      Gender
-  isActive    Boolean @default(true)
+  isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -47,31 +47,29 @@ model Doctor {
   appointments Appointment[]
 
   @@map("doctors")
-
 }
 
 model Appointment {
-  id          String            @id @default(cuid())
-  date        DateTime
-  time        String // store time as string i.e. 14:30
-  duration    Int               @default(30) // duration in minutes
-  status      AppointmentStatus @default(CONFIRMED)
-  notes       String?
-  reason      String? // reason for appointment - teeth cleaning? emergency visit? etc.
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
+  id        String            @id @default(cuid())
+  date      DateTime
+  time      String            // store time as string i.e. 14:30
+  duration  Int               @default(30) // duration in minutes
+  status    AppointmentStatus @default(CONFIRMED)
+  notes     String?
+  reason    String?           // reason for appointment - teeth cleaning? emergency visit? etc.
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
 
   // foreign keys
-  userId String
+  userId   String
   doctorId String
 
   // relationships
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   doctor Doctor @relation(fields: [doctorId], references: [id], onDelete: Cascade)
 
   @@map("appointments")
 }
-
 
 enum Gender {
   MALE
