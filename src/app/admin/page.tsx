@@ -3,40 +3,48 @@ import { redirect } from "next/navigation";
 import AdminDashboardClient from "./AdminDashboardClient";
 
 async function AdminPage() {
-  const user = await currentUser();
+  // Wrap in try/catch so any unexpected error redirects instead of 500
+  try {
+    const user = await currentUser();
 
-  // User is not logged in -> send to home (or /sign-in if you prefer)
-  if (!user) {
+    // user is not logged in
+    if (!user) {
+      redirect("/");
+    }
+
+    // Get admin email from env (MAKE SURE THIS IS SET IN VERCEL)
+    const adminEmail = process.env.ADMIN_EMAIL;
+
+    // If no admin email configured, do not allow access to /admin
+    if (!adminEmail) {
+      // In dev you might want to throw, but in prod redirect is safer
+      redirect("/");
+    }
+
+    // Safely get the user's primary email
+    const primaryEmail =
+      user.emailAddresses.find(
+        (email) => email.id === user.primaryEmailAddressId
+      )?.emailAddress ??
+      user.emailAddresses[0]?.emailAddress ??
+      null;
+
+    // If user has no email or it doesn't match the admin email -> not admin
+    if (
+      !primaryEmail ||
+      primaryEmail.toLowerCase() !== adminEmail.toLowerCase()
+    ) {
+      // IMPORTANT: redirect to a PUBLIC route to avoid loops
+      redirect("/");
+    }
+
+    // If we reached here, user is authenticated AND is the admin
+    return <AdminDashboardClient />;
+  } catch (error) {
+    // This prevents a hard 500 if something unexpected happens
+    console.error("Error in AdminPage:", error);
     redirect("/");
   }
-
-  // Get admin email from env (make sure this is set in Vercel!)
-  const adminEmail = process.env.ADMIN_EMAIL;
-
-  // If admin email is not configured, don't allow access
-  if (!adminEmail) {
-    // You could also throw an error here in dev, but in prod a redirect is safer
-    redirect("/");
-  }
-
-  // Get the user's primary email (safer than just [0])
-  const primaryEmail =
-    user.emailAddresses.find(
-      (email) => email.id === user.primaryEmailAddressId
-    )?.emailAddress ?? user.emailAddresses[0]?.emailAddress ?? null;
-
-  // If no email or mismatch -> NOT admin
-  if (
-    !primaryEmail ||
-    primaryEmail.toLowerCase() !== adminEmail.toLowerCase()
-  ) {
-    // IMPORTANT: avoid redirecting to /dashboard to prevent loops
-    // if /dashboard also has logic that can redirect back to /admin.
-    redirect("/");
-  }
-
-  // At this point, user is authenticated AND matches admin email
-  return <AdminDashboardClient />;
 }
 
 export default AdminPage;
