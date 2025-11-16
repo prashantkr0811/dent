@@ -11,15 +11,52 @@ import { SettingsIcon } from "lucide-react";
 
 function AdminDashboardClient() {
   const { user } = useUser();
-  const { data: doctors = [], isLoading: doctorsLoading } = useGetDoctors();
-  const { data: appointments = [], isLoading: appointmentsLoading } = useGetAppointments();
 
-  // calculate stats from real data
+  const {
+    data: doctorsRaw,
+    isLoading: doctorsLoading,
+    // @ts-ignore – in case your hook has error or other fields
+    error: doctorsError,
+  } = useGetDoctors();
+
+  const {
+    data: appointmentsRaw,
+    isLoading: appointmentsLoading,
+    // @ts-ignore
+    error: appointmentsError,
+  } = useGetAppointments();
+
+  // Ensure we always work with arrays, even if hooks return null/undefined
+  const doctors = Array.isArray(doctorsRaw) ? doctorsRaw : [];
+  const appointments = Array.isArray(appointmentsRaw) ? appointmentsRaw : [];
+
+  // If either hook errored, show a safe fallback instead of crashing
+  if (doctorsError || appointmentsError) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="max-w-7xl mx-auto px-6 py-8 pt-24">
+          <div className="flex items-center justify-center h-96">
+            <div className="text-center space-y-2">
+              <p className="text-lg font-semibold">Unable to load admin data</p>
+              <p className="text-sm text-muted-foreground">
+                Please refresh the page or try again later.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // calculate stats from real data (with defensive checks)
   const stats = {
     totalDoctors: doctors.length,
-    activeDoctors: doctors.filter((doc) => doc.isActive).length,
+    activeDoctors: doctors.filter((doc: any) => !!doc?.isActive).length,
     totalAppointments: appointments.length,
-    completedAppointments: appointments.filter((app) => app.status === "COMPLETED").length,
+    completedAppointments: appointments.filter(
+      (app: any) => app?.status === "COMPLETED"
+    ).length,
   };
 
   if (doctorsLoading || appointmentsLoading) return <LoadingUI />;
@@ -34,14 +71,17 @@ function AdminDashboardClient() {
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full border border-primary/20">
               <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-primary">Admin Dashboard</span>
+              <span className="text-sm font-medium text-primary">
+                Admin Dashboard
+              </span>
             </div>
             <div>
               <h1 className="text-4xl font-bold mb-2">
                 Welcome back, {user?.firstName || "Admin"}!
               </h1>
               <p className="text-muted-foreground">
-                Manage doctors, oversee appointments, and monitor your dental practice performance.
+                Manage doctors, oversee appointments, and monitor your dental
+                practice performance.
               </p>
             </div>
           </div>
