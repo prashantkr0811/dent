@@ -1,7 +1,7 @@
-// next.config.ts
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  /* config options here */
   images: {
     remotePatterns: [
       {
@@ -17,14 +17,7 @@ const nextConfig: NextConfig = {
         hostname: "img.clerk.com",
       },
     ],
-    // ❌ remove this line, or set it to false
-    // unoptimized: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
+    unoptimized: true,
   },
 };
 
