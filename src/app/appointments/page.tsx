@@ -1,10 +1,10 @@
 "use client";
 
-import { AppointmentConfirmationModal } from "@/components/appointements/AppointmentConfirmationModal";
-import BookingConfirmationStep from "@/components/appointements/BookingConfirmationStep";
-import DoctorSelectionStep from "@/components/appointements/DoctorSelectionStep";
-import ProgressSteps from "@/components/appointements/ProgressSteps";
-import TimeSelectionStep from "@/components/appointements/TimeSelectionStep";
+import { AppointmentConfirmationModal } from "@/components/appointments/AppointmentConfirmationModal";
+import BookingConfirmationStep from "@/components/appointments/BookingConfirmationStep";
+import DoctorSelectionStep from "@/components/appointments/DoctorSelectionStep";
+import ProgressSteps from "@/components/appointments/ProgressSteps";
+import TimeSelectionStep from "@/components/appointments/TimeSelectionStep";
 import Navbar from "@/components/Navbar";
 import { useBookAppointment, useUserAppointments } from "@/hooks/use-appointment";
 import { APPOINTMENT_TYPES } from "@/lib/utils";
@@ -174,7 +174,9 @@ function AppointmentsPage() {
                   </div>
                 </div>
                 <div className="space-y-1 text-sm">
-                  <p className="text-muted-foreground">📅 {format(new Date(appointment.date), "MMM d, yyyy")}</p>
+                  <p className="text-muted-foreground">
+                    📅 {format(new Date(appointment.date), "MMM d, yyyy")}
+                  </p>
                   <p className="text-muted-foreground">🕐 {appointment.time}</p>
                 </div>
               </div>
