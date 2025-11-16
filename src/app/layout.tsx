@@ -30,6 +30,7 @@ export default function RootLayout({
   return (
     <TanStackProvider>
       <ClerkProvider
+         publishableKey={publishableKey}
         appearance={{
           variables: {
             colorPrimary: "#e78a53",
