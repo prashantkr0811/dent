@@ -1,19 +1,12 @@
-"use client";
-
 import Image from "next/image";
-import Link from "next/link";
-import { scrollToSection } from "@/lib/scroll-utils";
 
 function Footer() {
   return (
-    <footer role="contentinfo" className="px-6 py-12 border-t bg-muted/30">
+    <footer className="px-6 py-12 border-t bg-muted/30">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <button
-              onClick={() => scrollToSection("how-it-works")}
-              className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer"
-            >
+            <div className="flex items-center gap-2">
               <Image
                 src="/logo.png"
                 alt="DentWise Logo"
@@ -21,8 +14,8 @@ function Footer() {
                 height={32}
                 className="w-8 h-8"
               />
-              <span className="font-semibold text-lg">Dental</span>
-            </button>
+              <span className="font-semibold text-lg">DentWise</span>
+            </div>
             <p className="text-sm text-muted-foreground">
               AI-powered dental assistance that actually helps.
             </p>
@@ -32,25 +25,19 @@ function Footer() {
             <h4 className="font-medium mb-3">Product</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <button
-                  onClick={() => scrollToSection("how-it-works")}
-                  className="hover:text-foreground cursor-pointer transition-colors"
-                >
+                <a href="#" className="hover:text-foreground">
                   How it works
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => scrollToSection("pricing")}
-                  className="hover:text-foreground cursor-pointer transition-colors"
-                >
+                <a href="#" className="hover:text-foreground">
                   Pricing
-                </button>
+                </a>
               </li>
               <li>
-                <Link href="/faq" className="hover:text-foreground">
+                <a href="#" className="hover:text-foreground">
                   FAQ
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
@@ -59,19 +46,19 @@ function Footer() {
             <h4 className="font-medium mb-3">Support</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link href="/help" className="hover:text-foreground">
+                <a href="#" className="hover:text-foreground">
                   Help center
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-foreground">
+                <a href="#" className="hover:text-foreground">
                   Contact us
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/status" className="hover:text-foreground">
+                <a href="#" className="hover:text-foreground">
                   Status
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
@@ -80,29 +67,26 @@ function Footer() {
             <h4 className="font-medium mb-3">Legal</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link href="/privacy" className="hover:text-foreground">
+                <a href="#" className="hover:text-foreground">
                   Privacy
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/terms" className="hover:text-foreground">
+                <a href="#" className="hover:text-foreground">
                   Terms
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/security" className="hover:text-foreground">
+                <a href="#" className="hover:text-foreground">
                   Security
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>
-            &copy; {new Date().getFullYear()} Dental. Built for real people with
-            real dental questions.
-          </p>
+          <p>&copy; 2024 DentWise. Built for real people with real dental questions.</p>
         </div>
       </div>
     </footer>
