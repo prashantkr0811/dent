@@ -1,6 +1,6 @@
 "use server";
 
-import type { Gender } from "@prisma/client";
+import { Gender } from "@prisma/client";
 import { prisma } from "../prisma";
 import { generateAvatar } from "../utils";
 import { revalidatePath } from "next/cache";
@@ -88,7 +88,7 @@ export async function updateDoctor(input: UpdateDoctorInput) {
 
     const doctor = await prisma.doctor.update({
       where: { id: input.id },
-      // explicitly set fields to avoid accidentally overwriting undefined values
+      // ...input is going to trigger the unique constraint violation for email
       data: {
         name: input.name,
         email: input.email,
