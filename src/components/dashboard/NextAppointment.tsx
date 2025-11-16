@@ -1,4 +1,4 @@
-import { getUserAppointments } from "@/lib/actions/appointements";
+import { getUserAppointments } from "@/lib/actions/appointments";
 import { format, isAfter, isSameDay, parseISO } from "date-fns";
 import NoNextAppointments from "./NoNextAppointments";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
@@ -26,7 +26,7 @@ async function NextAppointment() {
   const isToday = isSameDay(appointmentDate, new Date());
 
   return (
-    <Card className="border-primary/20 bg-linear-to-br from-primary/5 to-background">
+    <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <CalendarIcon className="size-5 text-primary" />
