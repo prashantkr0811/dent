@@ -1,10 +1,14 @@
 // src/lib/resend.ts
-import { Resend } from "resend";
+// Stub so build doesn't fail. We don't actually send emails anymore.
 
-if (!process.env.RESEND_API_KEY) {
-  throw new Error("❌ RESEND_API_KEY missing in environment variables");
-}
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = {
+  emails: {
+    async send(options: any) {
+      console.log("Resend stub called. Options:", options);
+      return { data: { id: "stub-email-id" }, error: null };
+    },
+  },
+};
 
 export default resend;
+export { resend };
