@@ -16,26 +16,12 @@ export function useCreateDoctor() {
   const queryClient = useQueryClient();
 
   const result = useMutation({
-    mutationFn: async (input: any) => {
-      const res = await fetch("/api/doctors", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(input),
-      });
-
-      const data = await res.json();
-      if (!res.ok || !data?.ok) {
-        throw new Error(data?.error || "Failed to create doctor");
-      }
-
-      return data.doctor;
-    },
+    mutationFn: createDoctor,
     onSuccess: () => {
       // invalidate related queries to refresh the data
       queryClient.invalidateQueries({ queryKey: ["getDoctors"] });
-      queryClient.invalidateQueries({ queryKey: ["getAvailableDoctors"] });
     },
-    onError: (error: any) => console.error("Error while creating a doctor:", error?.message || error),
+    onError: (error) => console.log("Error while  creating a doctor"),
   });
 
   return result;
