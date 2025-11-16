@@ -1,9 +1,7 @@
-import React from "react";
 import Navbar from "@/components/Navbar";
 import FeatureCards from "@/components/voice/FeatureCards";
 import ProPlanRequired from "@/components/voice/ProPlanRequired";
 import VapiWidget from "@/components/voice/VapiWidget";
-//import GeminiWidget from "@/components/voice/GeminiWidget";
 import WelcomeSection from "@/components/voice/WelcomeSection";
 import { auth } from "@clerk/nextjs/server";
 
@@ -23,7 +21,6 @@ async function VoicePage() {
         <FeatureCards />
       </div>
 
-      {/* <GeminiWidget /> */}
       <VapiWidget />
     </div>
   );
