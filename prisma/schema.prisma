@@ -79,6 +79,12 @@ enum Gender {
 }
 
 enum AppointmentStatus {
- CONFIRMED
- COMPLETED
+  CONFIRMED
+  COMPLETED
+}
+{
+  "scripts": {
+    "postinstall": "prisma generate",
+    "build": "next build"
+  }
 }
