@@ -1,13 +1,12 @@
 "use client";
 
-// import {
-//   bookAppointment,
-//   getAppointments,
-//   getBookedTimeSlots,
-//   getUserAppointments,
-//   updateAppointmentStatus,
-// } from "@/lib/actions/appointments";
-import { bookAppointment, getAppointments, getBookedTimeSlots, getUserAppointments, updateAppointmentStatus } from "@/lib/actions/appointements";
+import {
+  bookAppointment,
+  getAppointments,
+  getBookedTimeSlots,
+  getUserAppointments,
+  updateAppointmentStatus,
+} from "@/lib/actions/appointments";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useGetAppointments() {
