@@ -93,7 +93,6 @@ function VapiWidget() {
         setCallEnded(false);
 
         await vapi.start(process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID);
-        //await vapi.start(process.env.OPENAI_API_KEY);
       } catch (error) {
         console.log("Failed to start call", error);
         setConnecting(false);
@@ -155,7 +154,7 @@ function VapiWidget() {
               />
 
               <div className="relative w-full h-full rounded-full bg-card flex items-center justify-center border border-border overflow-hidden">
-                <div className="absolute inset-0 bg-linear-to-b from-primary/10 to-primary/5"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-primary/5"></div>
                 <Image
                   src="/logo.png"
                   alt="AI Dental Assistant"
