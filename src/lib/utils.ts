@@ -13,29 +13,18 @@ export function generateAvatar(name: string, gender: "MALE" | "FEMALE") {
   return `${base}/boy?username=${username}`;
 }
 
-// phone formatting function for Indian numbers
+// phone formatting function for US numbers - ai generated 🎉
 export const formatPhoneNumber = (value: string) => {
   if (!value) return value;
 
-  // Remove all non-digit characters
   const phoneNumber = value.replace(/[^\d]/g, "");
+  const phoneNumberLength = phoneNumber.length;
 
-  // If it starts with country code 91, remove it to get just the 10-digit number
-  let cleaned = phoneNumber.endsWith("91") ? phoneNumber.slice(0, -2) : phoneNumber;
-  if (cleaned.startsWith("91")) {
-    cleaned = cleaned.slice(2);
+  if (phoneNumberLength < 4) return phoneNumber;
+  if (phoneNumberLength < 7) {
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
   }
-
-  // Keep only last 10 digits
-  cleaned = cleaned.slice(-10);
-
-  if (cleaned.length === 0) return "";
-  if (cleaned.length < 5) return "+91 " + cleaned;
-  if (cleaned.length <= 10) {
-    return "+91 " + cleaned.slice(0, 5) + " " + cleaned.slice(5);
-  }
-
-  return "+91 " + cleaned.slice(0, 5) + " " + cleaned.slice(5, 10);
+  return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
 };
 
 //  ai generated 🎉
@@ -71,8 +60,8 @@ export const getAvailableTimeSlots = () => {
 };
 
 export const APPOINTMENT_TYPES = [
-  { id: "checkup", name: "Regular Checkup", duration: "60 min", price: "₹999" },
-  { id: "cleaning", name: "Teeth Cleaning", duration: "45 min", price: "₹900" },
-  { id: "consultation", name: "Consultation", duration: "30 min", price: "₹750" },
-  { id: "emergency", name: "Emergency Visit", duration: "30 min", price: "₹1500" },
+  { id: "checkup", name: "Regular Checkup", duration: "60 min", price: "$120" },
+  { id: "cleaning", name: "Teeth Cleaning", duration: "45 min", price: "$90" },
+  { id: "consultation", name: "Consultation", duration: "30 min", price: "$75" },
+  { id: "emergency", name: "Emergency Visit", duration: "30 min", price: "$150" },
 ];
