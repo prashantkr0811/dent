@@ -91,7 +91,7 @@ function EditDoctorDialog({ doctor, isOpen, onClose }: EditDoctorDialogProps) {
                 id="phone"
                 value={editingDoctor.phone}
                 onChange={(e) => handlePhoneChange(e.target.value)}
-                placeholder="+91 98989 89898"
+                placeholder="(555) 123-4567"
               />
             </div>
 
