@@ -1,8 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// prisma/schema.prisma
 
 generator client {
   provider = "prisma-client-js"
@@ -10,10 +6,10 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  // Use a proper environment variable name here
   url      = env("DATABASE_URL")
 }
 
+// ==================== USER MODEL ====================
 model User {
   id        String   @id @default(cuid())
   clerkId   String   @unique
@@ -21,62 +17,72 @@ model User {
   firstName String?
   lastName  String?
   phone     String?
-  createdAt DateTime @default(now()) // member since sep 2025
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // relationships
+  // Relations
   appointments Appointment[]
 
   @@map("users")
 }
 
+// ==================== DOCTOR MODEL ====================
 model Doctor {
-  id          String   @id @default(cuid())
-  name        String
-  email       String   @unique
-  phone       String
-  speciality  String
-  bio         String?
-  imageUrl    String
-  gender      Gender
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String  @id @default(cuid())
+  name       String
+  email      String  @unique
+  phone      String
+  speciality String
+  bio        String?
+  imageUrl   String  @default("https://avatar.vercel.sh/doctor.png")
+  gender     Gender
+  isActive   Boolean @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-  // relationships
+  // Relations
   appointments Appointment[]
 
   @@map("doctors")
 }
 
+// ==================== APPOINTMENT MODEL ====================
 model Appointment {
   id        String            @id @default(cuid())
-  date      DateTime
-  time      String            // store time as string i.e. 14:30
-  duration  Int               @default(30) // duration in minutes
+  date      DateTime          // full date (e.g., 2025-12-25T00:00:00Z)
+  time      String            // e.g., "14:30"
+  duration  Int               @default(30)   // in minutes
   status    AppointmentStatus @default(CONFIRMED)
   notes     String?
-  reason    String?           // reason for appointment - teeth cleaning? emergency visit? etc.
-  createdAt DateTime          @default(now())
-  updatedAt DateTime          @updatedAt
+  reason    String?
 
-  // foreign keys
-  userId   String
-  doctorId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  // relationships
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  doctor Doctor @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  // Foreign Keys
+  userId    String
+  doctorId  String
 
+  // Relations
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  doctor    Doctor  @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  // Unique constraint to prevent double booking
+  @@unique([doctorId, date, time])
   @@map("appointments")
 }
 
+// ==================== ENUMS ====================
 enum Gender {
   MALE
   FEMALE
+  OTHER     // future-proof
 }
 
 enum AppointmentStatus {
+  PENDING
   CONFIRMED
   COMPLETED
+  CANCELLED
+  NO_SHOW
 }
