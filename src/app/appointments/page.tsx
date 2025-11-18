@@ -1,13 +1,15 @@
 "use client";
 
-import { AppointmentConfirmationModal } from "@/components/appointments/AppointmentConfirmationModal";
-import BookingConfirmationStep from "@/components/appointments/BookingConfirmationStep";
-import DoctorSelectionStep from "@/components/appointments/DoctorSelectionStep";
-import ProgressSteps from "@/components/appointments/ProgressSteps";
-import TimeSelectionStep from "@/components/appointments/TimeSelectionStep";
+
+import { AppointmentConfirmationModal } from "@/components/appointements/AppointmentConfirmationModal";
+import BookingConfirmationStep from "@/components/appointements/BookingConfirmationStep";
+import DoctorSelectionStep from "@/components/appointements/DoctorSelectionStep";
+import ProgressSteps from "@/components/appointements/ProgressSteps";
+import TimeSelectionStep from "@/components/appointements/TimeSelectionStep";
+import { APPOINTMENT_TYPES } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
 import { useBookAppointment, useUserAppointments } from "@/hooks/use-appointment";
-import { APPOINTMENT_TYPES } from "@/lib/utils";
+// import { APPOINTMENT_TYPES } from "@/lib/utils";
 import { format } from "date-fns";
 import { useState } from "react";
 import { toast } from "sonner";

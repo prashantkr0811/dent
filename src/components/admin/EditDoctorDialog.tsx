@@ -9,11 +9,11 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "./ui/dialog";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { Button } from "./ui/button";
+} from "../ui/dialog";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Button } from "../ui/button";
 
 interface EditDoctorDialogProps {
   isOpen: boolean;
@@ -28,14 +28,14 @@ function EditDoctorDialog({ doctor, isOpen, onClose }: EditDoctorDialogProps) {
 
   const handlePhoneChange = (value: string) => {
     const formattedPhoneNumber = formatPhoneNumber(value);
-    setEditingDoctor((prev) =>
-      prev ? { ...prev, phone: formattedPhoneNumber } : prev
-    );
+    if (editingDoctor) {
+      setEditingDoctor({ ...editingDoctor, phone: formattedPhoneNumber });
+    }
   };
 
   const handleSave = () => {
     if (editingDoctor) {
-      updateDoctorMutation.mutate(editingDoctor, { onSuccess: handleClose });
+      updateDoctorMutation.mutate({ ...editingDoctor }, { onSuccess: handleClose });
     }
   };
 
@@ -60,11 +60,7 @@ function EditDoctorDialog({ doctor, isOpen, onClose }: EditDoctorDialogProps) {
                 <Input
                   id="name"
                   value={editingDoctor.name}
-                  onChange={(e) =>
-                    setEditingDoctor((prev) =>
-                      prev ? { ...prev, name: e.target.value } : prev
-                    )
-                  }
+                  onChange={(e) => setEditingDoctor({ ...editingDoctor, name: e.target.value })}
                 />
               </div>
               <div className="space-y-2">
@@ -73,9 +69,7 @@ function EditDoctorDialog({ doctor, isOpen, onClose }: EditDoctorDialogProps) {
                   id="speciality"
                   value={editingDoctor.speciality}
                   onChange={(e) =>
-                    setEditingDoctor((prev) =>
-                      prev ? { ...prev, speciality: e.target.value } : prev
-                    )
+                    setEditingDoctor({ ...editingDoctor, speciality: e.target.value })
                   }
                 />
               </div>
@@ -87,11 +81,7 @@ function EditDoctorDialog({ doctor, isOpen, onClose }: EditDoctorDialogProps) {
                 id="email"
                 type="email"
                 value={editingDoctor.email}
-                onChange={(e) =>
-                  setEditingDoctor((prev) =>
-                    prev ? { ...prev, email: e.target.value } : prev
-                  )
-                }
+                onChange={(e) => setEditingDoctor({ ...editingDoctor, email: e.target.value })}
               />
             </div>
 
@@ -111,9 +101,7 @@ function EditDoctorDialog({ doctor, isOpen, onClose }: EditDoctorDialogProps) {
                 <Select
                   value={editingDoctor.gender || ""}
                   onValueChange={(value) =>
-                    setEditingDoctor((prev) =>
-                      prev ? { ...prev, gender: value as Gender } : prev
-                    )
+                    setEditingDoctor({ ...editingDoctor, gender: value as Gender })
                   }
                 >
                   <SelectTrigger>
@@ -130,11 +118,7 @@ function EditDoctorDialog({ doctor, isOpen, onClose }: EditDoctorDialogProps) {
                 <Select
                   value={editingDoctor.isActive ? "active" : "inactive"}
                   onValueChange={(value) =>
-                    setEditingDoctor((prev) =>
-                      prev
-                        ? { ...prev, isActive: value === "active" }
-                        : prev
-                    )
+                    setEditingDoctor({ ...editingDoctor, isActive: value === "active" })
                   }
                 >
                   <SelectTrigger>

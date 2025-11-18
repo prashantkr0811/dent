@@ -1,4 +1,5 @@
-import { getUserAppointmentStats } from "@/lib/actions/appointments";
+//import { getUserAppointmentStats } from "@/lib/actions/appointments";
+import { getUserAppointmentStats } from "@/lib/actions/appointements";
 import { currentUser } from "@clerk/nextjs/server";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { BrainIcon, MessageSquareIcon } from "lucide-react";

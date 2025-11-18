@@ -1,8 +1,8 @@
 "use server";
 
 import { Gender } from "@prisma/client";
-import { prisma } from "./prisma";
-import { generateAvatar } from "./utils";
+import { prisma } from "../prisma";
+import { generateAvatar } from "../utils";
 import { revalidatePath } from "next/cache";
 
 export async function getDoctors() {
@@ -88,6 +88,7 @@ export async function updateDoctor(input: UpdateDoctorInput) {
 
     const doctor = await prisma.doctor.update({
       where: { id: input.id },
+      // ...input is going to trigger the unique constraint violation for email
       data: {
         name: input.name,
         email: input.email,

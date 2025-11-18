@@ -1,5 +1,6 @@
 import { useBookedTimeSlots } from "@/hooks/use-appointment";
-import { APPOINTMENT_TYPES, getAvailableTimeSlots, getNext5Days } from "@/lib/utils";
+// import { APPOINTMENT_TYPES, getAvailableTimeSlots, getNext5Days } from "@/lib/utils";
+import { getNext5Days, getAvailableTimeSlots, APPOINTMENT_TYPES } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { ChevronLeftIcon, ClockIcon } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
